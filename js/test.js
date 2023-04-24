@@ -1,74 +1,23 @@
-const mealList = [
-    {
-        "name": "食在一方",
-        "category": ["brunch"],
-        "filter": false
-    },
-    {
-        "name": "日十",
-        "category": ["brunch"],
-        "filter": false
-    },
-    {
-        "name": "鹽行站",
-        "category": ["buffet", "rice"],
-        "filter": false
-    },
-    {
-        "name": "鍋燒麵",
-        "category": ["noodle"],
-        "filter": false
-    },
-    {
-        "name": "炒飯",
-        "category": ["rice"],
-        "filter": false
-    },
-    {
-        "name": "八方雲集",
-        "category": ["others"],
-        "filter": false
-    },
-    {
-        "name": "火鍋",
-        "category": ["others"],
-        "filter": false
-    },
-    {
-        "name": "韓式料理",
-        "category": ["rice", "noodle"],
-        "filter": false
-    },
-    {
-        "name": "小飯糰大飯糰",
-        "category": ["rice"],
-        "filter": false
-    },
-    {
-        "name": "後校門滷肉飯",
-        "category": ["rice", "noodle"],
-        "filter": false
-    },
-    {
-        "name": "魚耶",
-        "category": ["brunch", "rice", "noodle"],
-        "filter": false
-    },
-    {
-        "name": "吳家鴨香飯",
-        "category": ["rice", "noodle"],
-        "filter": false
-    }
-]
 const searchBtn = document.querySelector(".search-btn");
 const answer = document.querySelector(".answer-text")
 const checkboxes = document.querySelectorAll('input[type=checkbox]');
 
-
+let mealList = [];
+//fetch()為非同步語法，以下為fetch()的固定用法，
+fetch("./mealList.json")
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        mealList = data;
+        console.log(mealList);
+    })
+    .catch(function (error) {
+        console.error('匯入 JSON 檔案發生錯誤', error);
+    });
 
 
 searchBtn.addEventListener("click", () => {
-
     const selectedCategories = [];
     const resultArr = [];
     checkboxes.forEach(checkbox => {
